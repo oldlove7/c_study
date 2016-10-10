@@ -25,7 +25,7 @@ void Withdraw();			//출금
 void Inquire();				//잔액조회
 
 enum{MAKE=1, DEPOSIT, WITHDRAW, INQUIRE, EXIT};
-
+//메인함수
 int main(void)
 {
 	int choice;
