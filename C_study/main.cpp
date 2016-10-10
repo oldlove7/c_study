@@ -7,13 +7,22 @@ Written by oldlove7
 #include <windows.h>
 
 using namespace::std;
-const int NAME_LEN=30;
-typedef struct _Account
+const int NAME_LEN=20;
+
+class Account
 {
 	int id;                //계좌번호
 	int balance;           //잔액
-	char name[NAME_LEN];   //이름
-}Account;
+	char* name;   //이름
+	
+	public
+		Account(){}
+	Account(int id, char* name, int balance)
+	{
+		this->id=id;
+
+
+};
 
 Account pArray[100];
 int index=0;               //저장된 Account 수
