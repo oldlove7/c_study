@@ -15,16 +15,37 @@ class Account
 	int balance;           //잔액
 	char* name;   //이름
 	
-	public
-		Account(){}
+public:
+	Account(){}    //So Important!!!
 	Account(int id, char* name, int balance)
 	{
 		this->id=id;
+		this->balance=balance;
+		this->name=new char[strlen(name)+1];
+	}
+	~Account(){
+		delete []name;
+	}
 
-
+	int GetID(){return id;}
+	int GetBalance(){return balance;}
+	void AddMoney(int val){
+		balance+=val;
+	}
+	void MinMoney(int val){
+		balance -=val;
+	}
+	char* GetName(){
+		return name;
+	}
+	void ShowAllData(){
+		cout<<"계좌 ID:  "<<id<<endl;
+		cout<<"이   름:  "<<name<<endl;
+		cout<<"잔   액:  "<<balance<<endl;
+	}
 };
 
-Account pArray[100];
+Account* pArray[100];
 int index=0;               //저장된 Account 수
 
 void PrintMenu();          //메뉴출력
@@ -79,7 +100,7 @@ void PrintMenu()
 	cout<<"4. 잔액조회"<<endl;
 	cout<<"5. 종료  "<<endl;
 }
-
+//계좌개설
 void MakeAccount()
 {
 	int id;
@@ -91,13 +112,9 @@ void MakeAccount()
 	cout<<"이름   :  "; cin>>name;
 	cout<<"입금액 :  "; cin>>balance;
 
-	pArray[index].id = id;
-	pArray[index].balance = balance;
-	strcpy(pArray[index].name,name);
-
-	index++;
+	pArray[index++] = new Account(id,name,balance);
 }
-
+//입금
 void Deposit()
 {
 	int money;
@@ -108,9 +125,9 @@ void Deposit()
 
 	for(int i=0; i<index; i++)
 	{
-		if(pArray[i].id ==id)
+		if(pArray[i]->GetID()==id)
 		{
-			pArray[i].balance+=money;
+			pArray[i]->AddMoney(money);
 			cout<<"입금완료"<<endl;
 			return;
 		}
@@ -128,14 +145,14 @@ void Withdraw()
 
 	for(int i=0; i<index; i++)
 	{
-		if(pArray[i].id == id)
+		if(pArray[i]->GetID()==id)
 		{
-			if(pArray[i].balance<money)
+			if(pArray[i]->GetBalance()<money)
 			{
 				cout<<"잔액부족"<<endl;
 				return;
 			}
-			pArray[i].balance-=money;
+			pArray[i]->MinMoney(money);
 			cout<<"출금완료"<<endl;
 			return;
 		}
@@ -147,9 +164,7 @@ void Inquire()
 {
 	for(int i=0; i<index; i++)
 	{
-		cout<<"계좌ID"<<pArray[i].id<<endl;
-		cout<<"이름  "<<pArray[i].name<<endl;
-		cout<<"잔액  "<<pArray[i].balance<<endl;
+		pArray[i]->ShowAllData();
 	}
 }
 
