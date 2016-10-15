@@ -41,6 +41,7 @@ public:
 	void ShowAllData(){
 		cout<<"°èÁÂ ID:  "<<id<<endl;
 		cout<<"ÀÌ   ¸§:  "<<name<<endl;
+		//printf("name : %s \n",name);
 		cout<<"ÀÜ   ¾×:  "<<balance<<endl;
 	}
 };
