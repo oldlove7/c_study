@@ -22,6 +22,14 @@ public:
 		this->id=id;
 		this->balance=balance;
 		this->name=new char[strlen(name)+1];
+		strcpy(this->name,name);
+	}
+	Account(const Account& acc)
+	{
+		this->id = acc.id;
+		this->balance = acc.balance;
+		this->name = new char[strlen(acc.name)+1];
+		strcpy(this->name, name);
 	}
 	~Account(){
 		delete []name;
@@ -41,7 +49,6 @@ public:
 	void ShowAllData(){
 		cout<<"°èÁÂ ID:  "<<id<<endl;
 		cout<<"ÀÌ   ¸§:  "<<name<<endl;
-		//printf("name : %s \n",name);
 		cout<<"ÀÜ   ¾×:  "<<balance<<endl;
 	}
 };
