@@ -1,4 +1,4 @@
-/* Banking System v 1.0
+/* Banking System v 2.2
 Written by oldlove7
 */
 
@@ -43,7 +43,8 @@ public:
 	void MinMoney(int val){
 		balance -=val;
 	}
-	char* GetName(){
+	//»ó¼öÈ­
+	const char* GetName() const{
 		return name;
 	}
 	void ShowAllData(){
