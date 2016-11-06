@@ -1,5 +1,8 @@
-/* Banking System v 2.2
+/* Banking System v 3.0
 Written by oldlove7
+
+AccManager 라는 이름의 Control 클래스 멤법 함수의 정의
+부분 클래스 밖으로 빼냄
 */
 
 
@@ -9,6 +12,7 @@ Written by oldlove7
 using namespace::std;
 const int NAME_LEN=20;
 
+//************Acount Class************************//
 class Account
 {
 	int id;                //계좌번호
@@ -17,90 +21,94 @@ class Account
 	
 public:
 	Account(){}    //So Important!!!
-	Account(int id, char* name, int balance)
-	{
-		this->id=id;
-		this->balance=balance;
-		this->name=new char[strlen(name)+1];
-		strcpy(this->name,name);
-	}
-	Account(const Account& acc)
-	{
-		this->id = acc.id;
-		this->balance = acc.balance;
-		this->name = new char[strlen(acc.name)+1];
-		strcpy(this->name, name);
-	}
-	~Account(){
-		delete []name;
-	}
+	Account(int id, char* name, int balance);
 
-	int GetID(){return id;}
-	int GetBalance(){return balance;}
-	void AddMoney(int val){
-		balance+=val;
-	}
-	void MinMoney(int val){
-		balance -=val;
-	}
+	Account(const Account& acc);
+
+	~Account();
+
+	int GetID() const;           //계좌번호 조회
+	int GetBalance() const;      //잔액 조회
+	void AddMoney(int val);      //입 금
+	void MinMoney(int val);      //출금
 	//상수화
-	const char* GetName() const{
-		return name;
-	}
-	void ShowAllData(){
-		cout<<"계좌 ID:  "<<id<<endl;
-		cout<<"이   름:  "<<name<<endl;
-		cout<<"잔   액:  "<<balance<<endl;
-	}
+	const char* GetName() const; //상수화
+	void ShowAllData();
 };
 
-Account* pArray[100];
-int index=0;               //저장된 Account 수
-
-void PrintMenu();          //메뉴출력
-void MakeAccount();        //계좌 계설을 위한 함수
-void Deposit();				//입금
-void Withdraw();			//출금
-void Inquire();				//잔액조회
-
-enum{MAKE=1, DEPOSIT, WITHDRAW, INQUIRE, EXIT};
-
-int main(void)
+Account::Account(int id, char* name, int balance)
 {
-	int choice;
-
-
-
-	while(1)
-	{
-		PrintMenu();
-	    cout<<"선택: ";
-	    cin>>choice;
-		switch(choice)
-		{
-		case MAKE:
-			MakeAccount();
-			break;
-		case DEPOSIT:
-			Deposit();
-			break;
-		case WITHDRAW:
-			Withdraw();
-			break;
-		case INQUIRE:
-			Inquire();
-			break;
-		case EXIT:
-			return 0;
-		default:
-			cout<<"Illegal select.."<<endl;
-			break;
-		}
-	}
-	return 0;
+	this->id=id;
+	this->balance=balance;
+	this->name=new char[strlen(name)+1];
+	strcpy(this->name,name);
 }
 
-void PrintMenu()
+Account::Account(const Account& acc)
+{
+	this->id = acc.id;
+    this->balance = acc.balance;
+	this->name = new char[strlen(acc.name)+1];
+	strcpy(this->name, name);
+}
+
+Account::~Account()
+{
+	delete []name;
+}
+
+int Account::GetID() const{
+	return id;
+}
+
+int Account::GetBalance() const {
+	return balance;
+}
+
+void Account::AddMoney(int val)
+{
+	balance += val;
+}
+
+void Account::MinMoney(int val)
+{
+	balance -= val;
+}
+
+const char* Account::GetName() const
+{
+	return name;
+}
+
+void Account::ShowAllData()
+{
+	void ShowAllData();
+	cout<<"계좌 ID:  "<<id<<endl;
+	cout<<"이   름:  "<<name<<endl;
+	cout<<"잔   액:  "<<balance<<endl;
+}
+
+///////***********AccManager Class/////////
+class AccManager
+{
+	Account* pArray[100];   //Account 저장을 위한 배열
+	int index;              //저장된 Account 수
+
+public:
+	AccManager();
+	void PrintMenu();
+	void MakeAccount();
+	void Deposit();
+	void Withdraw();
+	void Inquire();
+};
+
+AccManager::AccManager()
+{
+	index=0;   
+}
+
+void AccManager::PrintMenu()
 {
 	cout<<"---menu-----"<<endl;
 	cout<<"1. 계좌계설"<<endl;
@@ -110,7 +118,7 @@ void PrintMenu()
 	cout<<"5. 종료  "<<endl;
 }
 //계좌개설
-void MakeAccount()
+void AccManager::MakeAccount()
 {
 	int id;
 	char name[NAME_LEN];
@@ -124,7 +132,7 @@ void MakeAccount()
 	pArray[index++] = new Account(id,name,balance);
 }
 //입금
-void Deposit()
+void AccManager::Deposit()
 {
 	int money;
 	int id;
@@ -144,7 +152,7 @@ void Deposit()
 	cout<<"유효하지 않은 ID 입니다"<<endl;
 }
 
-void Withdraw()
+void AccManager::Withdraw()
 {
 	int money;
 	int id;
@@ -169,7 +177,7 @@ void Withdraw()
 	cout<<"유효하지 않은 ID 입니다"<<endl;
 }
 
-void Inquire()
+void AccManager::Inquire()
 {
 	for(int i=0; i<index; i++)
 	{
@@ -177,4 +185,40 @@ void Inquire()
 	}
 }
 
+
+
+enum{MAKE=1, DEPOSIT, WITHDRAW, INQUIRE, EXIT};
+int main(void)
+{
+	int choice;
+	AccManager manager;
+
+	while(1)
+	{
+		manager.PrintMenu();
+	    cout<<"선택: ";
+	    cin>>choice;
+		switch(choice)
+		{
+		case MAKE:
+			manager.MakeAccount();
+			break;
+		case DEPOSIT:
+			manager.Deposit();
+			break;
+		case WITHDRAW:
+			manager.Withdraw();
+			break;
+		case INQUIRE:
+			manager.Inquire();
+			break;
+		case EXIT:
+			return 0;
+		default:
+			cout<<"Illegal select.."<<endl;
+			break;
+		}
+	}
+	return 0;
+}
 
