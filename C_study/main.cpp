@@ -166,6 +166,7 @@ void AccManager::Withdraw()
 		{
 			if(pArray[i]->GetBalance()<money)
 			{
+
 				cout<<"ÀÜ¾×ºÎÁ·"<<endl;
 				return;
 			}
