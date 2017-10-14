@@ -17,7 +17,7 @@ class Account
 {
 	int id;                //계좌번호
 	int balance;           //잔액
-	char* name;   //이름
+	char* name;   //이름jjjj
 	
 public:
 	Account(){}    //So Important!!!
