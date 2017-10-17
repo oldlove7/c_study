@@ -1,7 +1,6 @@
 ﻿  main.cpp
-f:\git_source\c_study\c_study\main.cpp(44): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\git_source\c_study\c_study\main.cpp(44): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files\windows kits\10\include\10.0.15063.0\ucrt\string.h(136): note: 'strcpy' 선언을 참조하십시오.
-f:\git_source\c_study\c_study\main.cpp(52): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\git_source\c_study\c_study\main.cpp(52): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files\windows kits\10\include\10.0.15063.0\ucrt\string.h(136): note: 'strcpy' 선언을 참조하십시오.
-  C_study.vcxproj -> F:\git_source\c_study\Debug\C_study.exe
-  C_study.vcxproj -> F:\git_source\c_study\Debug\C_study.pdb (Partial PDB)
+  C_study.vcxproj -> C:\git_source\c_study\Debug\C_study.exe

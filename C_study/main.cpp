@@ -125,7 +125,7 @@ void AccManager::MakeAccount()
 	int balance;
 
 	cout<<"°èÁÂ°è¼³-----"<<endl;
-	cout<<"°èÁÂ ID:  "; cin>>id;
+	cout<<"°èÁÂ ¹øÈ£:  "; cin>>id;
 	cout<<"ÀÌ¸§   :  "; cin>>name;
 	cout<<"ÀÔ±Ý¾× :  "; cin>>balance;
 
