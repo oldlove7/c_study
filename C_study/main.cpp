@@ -17,7 +17,7 @@ class Account
 {
 	int id;                //°èÁÂ¹øÈ£
 	int balance;           //ÀÜ¾×
-	char* name;   //ÀÌ¸§
+	char* name;   //ÀÌ¸§jjjj
 	
 public:
 	Account(){}    //So Important!!!
@@ -166,6 +166,7 @@ void AccManager::Withdraw()
 		{
 			if(pArray[i]->GetBalance()<money)
 			{
+
 				cout<<"ÀÜ¾×ºÎÁ·"<<endl;
 				return;
 			}
